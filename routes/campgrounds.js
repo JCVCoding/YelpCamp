@@ -36,9 +36,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         username: req.user.username
     }
     geocoder.geocode(req.body.location, function (err, data) {
-        console.log(data);
       if (err || !data.length) {
-          console.log(err);
         req.flash('error', 'Invalid address');
         return res.redirect('back');
       }
@@ -102,6 +100,7 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
           if(err){
               req.flash("error", err.message);
               res.redirect("back");
+              console.log(err);
           } else {
               req.flash("success","Successfully Updated!");
               res.redirect("/campgrounds/" + campground._id);
